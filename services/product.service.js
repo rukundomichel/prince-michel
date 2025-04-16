@@ -1,4 +1,4 @@
-import Product from "./product.service";
+import Product from "../models/product.models.js";
 
 class ProductService {
   async createProduct(productData) {
@@ -12,14 +12,14 @@ class ProductService {
 
   async getAllProducts() {
     try {
-      const product = await Product.find();
-      return product;
+      const products = await Product.find();
+      return products;
     } catch (error) {
       throw new Error("error getting products:" + error.message);
     }
   }
 
-  async getProfuctById(id) {
+  async getProductById(id) {
     try {
       const product = await Product.findById(id);
       return product;
