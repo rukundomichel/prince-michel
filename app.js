@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+//jj
 const port = process.env.PORT;
 const mongodb = process.env.MONGO_URL;
 
