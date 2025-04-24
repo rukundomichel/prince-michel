@@ -102,4 +102,23 @@ router.put('/:id', async (request, response) => {
     }
 })
 
+
+// delete blog
+
+router.delete('/:id', async (request, response) => {
+    const { id } = request.params;
+
+    try {
+        const blogDeletion = await Blog.findByIdAndDelete(id);
+
+        if (!blogDeletion) {
+            return response.status(400).json({ success: false, message: 'Blog Not Found, Please provide valid user!!' })
+        }
+
+        response.status(200).json({ success: true, message: 'Blog deleted successfully!!! :)' })
+    } catch (err) {
+        console.log(err);
+        response.status(500).json({ success: false, message: 'System Error' });
+    }
+})
 export default router;
