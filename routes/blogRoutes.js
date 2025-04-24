@@ -37,4 +37,32 @@ router.get('/:id', async(request, response)=>{
 
 // Post blog
 
+router.post('/create', async(request, response)=> {
+
+    try{
+        if(
+            !request.body.title ||
+            !request.body.description ||
+            !request.body.author ||
+            !request.body.category
+        ){
+            return response.status(400).json({success: false, message: 'Please fill in all requered fields'})
+        }
+
+        const newBlog = {
+            title: request.body.title,
+            description: request.body.description,
+            author: request.body.author,
+            category: request.body.category
+        }
+
+        const blog = await Blog.create(newBlog);
+
+        response.status(201).json({success: true, message: 'blog created success full', data: blog});
+    }catch(err){
+        console.log(err);
+        response.status(500).json({success: false, message: 'System Error!'})
+    }
+})
+
 export default router;
