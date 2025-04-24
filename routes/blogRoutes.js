@@ -7,9 +7,12 @@ router.get('/', async(request, response) => {
     try{
         
     }catch(err){
-        console.log(err)
+        console.log(err);
+        
     }
 })
+
+// Get one blog
 
 
 export default router;
