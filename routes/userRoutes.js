@@ -21,7 +21,7 @@ router.get('/:id', async (request, response) => {
 
     try {
         const user = await User.findById(id);
-        console.log(user);
+        
         if (user === null) {
             return response.status(404).json({ success: false, message: 'Can not find user!! Sorry :(' });
         }
