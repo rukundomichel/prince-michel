@@ -65,4 +65,41 @@ router.post('/create', async(request, response)=> {
     }
 })
 
+
+//update blog
+
+
+router.put('/:id', async (request, response) => {
+    const { id } = request.params;
+
+    try {
+        if (
+            !request.body.title ||
+            !request.body.description ||
+            !request.body.author ||
+            !request.body.category
+        ) {
+            return response.status(400).json({ success: false, message: "Please fill in all the required fields" })
+        }
+
+        const newBlog = {
+            title: request.body.title,
+            description: request.body.description,
+            author: request.body.author,
+            category: request.body.category
+        }
+
+        const blog = await Blog.findByIdAndUpdate(id, newBlog);
+
+        if(!blog){
+            return response.status(404).json({success: false, message: 'Blog not found'})
+        }
+
+        response.status(201).json({success: true, message: 'Blog updated succcessfully :)', data: blog});
+    } catch (err) {
+        console.log(err);
+        response.status(500).json({ success: false, message: 'System Error' });
+    }
+})
+
 export default router;
