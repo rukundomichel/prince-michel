@@ -21,7 +21,7 @@ router.get('/:id', async (request, response) => {
 
     try {
         const user = await User.findById(id);
-        
+
         if (user === null) {
             return response.status(404).json({ success: false, message: 'Can not find user!! Sorry :(' });
         }
@@ -42,7 +42,7 @@ router.put('/:id', async (request, response) => {
             !request.body.userName ||
             !request.body.password ||
             !request.body.role
-        ) {
+        ){
             return response.status(400).json({ success: false, message: "Please fill in all the required fields" })
         }
 
